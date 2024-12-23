@@ -15,13 +15,7 @@ class InkWellCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  ArticleScreen()),
-        );
-        print('$title tapped!');
-      },
+
       child: Container(
         margin: EdgeInsets.all(5.0),
         padding: EdgeInsets.all(15.0),

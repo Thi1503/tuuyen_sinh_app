@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:test_ide/screen/article_screen.dart';
 import 'package:test_ide/screen/home_screen.dart';
 import 'package:test_ide/screen/login_screen.dart';
+import 'package:test_ide/screen/test_screen.dart';
 import 'package:test_ide/test.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Tuyen sinh app",
-      home: WebViewExample(),
+      home: HomeScreen(),
     );
   }
 }

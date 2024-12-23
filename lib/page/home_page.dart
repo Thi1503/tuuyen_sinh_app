@@ -67,17 +67,10 @@ class _HomePageState extends State<HomePage> {
                       final article = newsArticles[index];
                       return GestureDetector(
                         onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text(article.title),
-                              content: Text(article.description),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text('Close'),
-                                ),
-                              ],
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ArticleDetailScreen(article: article),
                             ),
                           );
                         },
@@ -129,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+
             const SizedBox(height: 10),
 
             // Banner with button section
@@ -249,7 +243,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 10),
 
-            // Undergraduate Admission Section
+            // Tuyển sinh đại học
             const Padding(
               padding: EdgeInsets.all(10.0),
               child: Align(
@@ -267,13 +261,23 @@ class _HomePageState extends State<HomePage> {
               width: MediaQuery.of(context).size.width * 0.95,
               height: MediaQuery.of(context).size.height * 0.4,
               child: ListView.builder(
-                itemCount: newsArticles.length,
+                itemCount: 3, // Hiển thị tối đa 3 bài viết
                 itemBuilder: (context, index) {
                   final article = newsArticles[index];
-                  return InkWellCard(
-                    imagePath: article.imageUrl,
-                    title: article.title,
-                    description: article.description,
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ArticleDetailScreen(article: article),
+                        ),
+                      );
+                    },
+                    child: InkWellCard(
+                      imagePath: article.imageUrl,
+                      title: article.title,
+                      description: article.description,
+                    ),
                   );
                 },
               ),
@@ -285,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomRight,
                 child: TextButton(
                   onPressed: () {
-                    // Add your action here
+                    // Add your "Xem thêm" functionality here
                   },
                   child: const Text(
                     '> Xem thêm',
@@ -299,7 +303,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            // Postgraduate Admission Section
+            // Tuyển sinh sau đại học
             const Padding(
               padding: EdgeInsets.all(10.0),
               child: Align(
@@ -317,13 +321,24 @@ class _HomePageState extends State<HomePage> {
               width: MediaQuery.of(context).size.width * 0.95,
               height: MediaQuery.of(context).size.height * 0.4,
               child: ListView.builder(
-                itemCount: newsArticles.length,
+                itemCount: 3, // Hiển thị tối đa 3 bài viết
                 itemBuilder: (context, index) {
                   final article = newsArticles[index];
-                  return InkWellCard(
-                    imagePath: article.imageUrl,
-                    title: article.title,
-                    description: article.description,
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ArticleDetailScreen(article: article),
+                        ),
+                      );
+                    },
+                    child: InkWellCard(
+                      imagePath: article.imageUrl,
+                      title: article.title,
+                      description: article.description,
+                    ),
                   );
                 },
               ),
@@ -335,7 +350,7 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomRight,
                 child: TextButton(
                   onPressed: () {
-                    // Add your action here
+                    // Add your "Xem thêm" functionality here
                   },
                   child: const Text(
                     '> Xem thêm',
@@ -393,4 +408,43 @@ class _HomePageState extends State<HomePage> {
 // Category Card Widget
 
 // Category List
+// Màn hình chi tiết bài viết
+// Màn hình chi tiết bài viết
+class ArticleDetailScreen extends StatelessWidget {
+  final NewsArticle article;
 
+  const ArticleDetailScreen({Key? key, required this.article}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(article.title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(article.imageUrl, fit: BoxFit.cover),
+            const SizedBox(height: 16),
+            Text(
+              article.title,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              article.description,
+              style: const TextStyle(fontSize: 16, color: Colors.black54),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              article.content,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
